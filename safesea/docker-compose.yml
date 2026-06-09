@@ -1,0 +1,52 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: safesea-db
+    environment:
+      POSTGRES_USER: safesea
+      POSTGRES_PASSWORD: safesea
+      POSTGRES_DB: safesea
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # also run schema/seed on a fresh volume (backend re-applies idempotently too)
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U safesea -d safesea"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: safesea-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: "4000"
+      PGHOST: db
+      PGPORT: "5432"
+      PGUSER: safesea
+      PGPASSWORD: safesea
+      PGDATABASE: safesea
+      JWT_SECRET: change-me-in-production
+      DB_DIR: /app/db
+    volumes:
+      # single source of truth for schema/seed used by the startup initializer
+      - ./db:/app/db:ro
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build: ./frontend
+    container_name: safesea-frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+
+volumes:
+  pgdata:

@@ -1,0 +1,563 @@
+<div id="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<!-- ═══ LOGIN ═══ -->
+<div class="page active" id="pg-login">
+<div class="auth-card">
+  <div class="auth-logo">
+    <div class="logo-mark"><svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+      <path d="M19 4L34 28H4Z" fill="none" stroke="var(--ac)" stroke-width="1.5"/>
+      <path d="M9 28Q19 13 29 28" fill="rgba(0,180,255,.15)" stroke="var(--ac)" stroke-width="1.2"/>
+      <circle cx="19" cy="20" r="3.5" fill="var(--ac)"/>
+      <line x1="19" y1="4" x2="19" y2="13" stroke="var(--ac2)" stroke-width="1" stroke-dasharray="2,2"/>
+    </svg></div>
+    <div class="auth-title" id="l-title">SAFESEA</div>
+    <div class="auth-sub" id="l-tag">Maritime Boundary Navigation System</div>
+  </div>
+  <div style="margin-bottom:16px;">
+    <div style="font-size:10px;color:var(--ac);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:9px;" id="l-role">Select Role</div>
+    <div class="role-grid">
+      <div class="rbtn active" onclick="selRole('fisherman',this)"><span class="ri">🎣</span><span id="l-rf">Fisherman</span></div>
+      <div class="rbtn" onclick="selRole('crew',this)"><span class="ri">⚓</span><span id="l-rc">Crew</span></div>
+      <div class="rbtn" onclick="selRole('admin',this)"><span class="ri">🛡️</span><span id="l-ra">Admin</span></div>
+    </div>
+  </div>
+  <div class="fg"><label id="l-user">Username / Vessel ID</label><div class="iw"><span class="ii">⚓</span><input class="fi" id="li-user" type="text" value="fisher_001"></div></div>
+  <div class="fg"><label id="l-pass">Password</label><div class="iw"><span class="ii">🔒</span><input class="fi" id="li-pass" type="password" value="pass123"></div></div>
+  <div class="fg"><label id="l-nat">Nationality</label>
+    <div class="iw"><span class="ii" style="z-index:1">🌏</span>
+      <select class="fs" id="li-nat">
+        <option value="IND">🇮🇳 India (IND)</option>
+        <option value="LKA">🇱🇰 Sri Lanka (LKA)</option>
+        <option value="MDV">🇲🇻 Maldives (MDV)</option>
+        <option value="BGD">🇧🇩 Bangladesh (BGD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="frow">
+    <label class="chk"><input type="checkbox" checked> <span id="l-rem">Remember me</span></label>
+    <a href="#" class="lsm" onclick="showPage('pg-forgot');return false;" id="l-frg">Forgot Password?</a>
+  </div>
+  <button class="abtn" onclick="doLogin()"><span id="l-btn">⚓ INITIALIZE NAVIGATION</span></button>
+  <div class="afooter" id="l-foot">Don't have an account? <a href="#" onclick="showPage('pg-signup');return false;">Sign Up</a></div>
+  <div class="adiv"><span id="l-sec">Secure AIS v4.2 · IMO Compliant</span></div>
+  <div style="display:flex;justify-content:center;gap:8px;">
+    <div class="ibtn" onclick="toggleTheme()" id="themeBtn">🌙</div>
+    <div class="ibtn lang-drop-wrap" style="width:auto;padding:0 10px;font-size:12px;font-weight:600;" onclick="toggleLangDrop(event)">
+      <span id="langLabel">EN</span> ▾
+      <div class="lang-drop" id="langDropMenu">
+        <div class="ld-item active" onclick="setLang('en',this);closeLangDrop()">🇬🇧 English</div>
+        <div class="ld-item" onclick="setLang('ta',this);closeLangDrop()">🇮🇳 தமிழ்</div>
+        <div class="ld-item" onclick="setLang('hi',this);closeLangDrop()">🇮🇳 हिन्दी</div>
+        <div class="ld-item" onclick="setLang('ml',this);closeLangDrop()">🇮🇳 മലയാളം</div>
+        <div class="ld-item" onclick="setLang('te',this);closeLangDrop()">🇮🇳 తెలుగు</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ SIGNUP ═══ -->
+<div class="page" id="pg-signup">
+<div class="auth-card" style="width:490px;">
+  <div class="auth-logo">
+    <div class="logo-mark"><svg width="38" height="38" viewBox="0 0 38 38" fill="none"><path d="M19 4L34 28H4Z" fill="none" stroke="var(--ac)" stroke-width="1.5"/><circle cx="19" cy="20" r="3.5" fill="var(--ac)"/></svg></div>
+    <div class="auth-title">SAFESEA</div><div class="auth-sub">Create Account</div>
+  </div>
+  <div class="role-grid" style="margin-bottom:16px;">
+    <div class="rbtn active" onclick="selRoleS('fisherman',this)"><span class="ri">🎣</span>Fisherman</div>
+    <div class="rbtn" onclick="selRoleS('crew',this)"><span class="ri">⚓</span>Crew</div>
+    <div class="rbtn" onclick="selRoleS('admin',this)"><span class="ri">🛡️</span>Admin</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div class="fg"><label>Full Name</label><div class="iw"><span class="ii">👤</span><input class="fi" type="text" placeholder="Ravi Kumar" id="su-name"></div></div>
+    <div class="fg"><label>Vessel ID</label><div class="iw"><span class="ii">🚢</span><input class="fi" type="text" placeholder="IND-TN-042" id="su-vessel"></div></div>
+  </div>
+  <div class="fg"><label>Email</label><div class="iw"><span class="ii">📧</span><input class="fi" type="email" placeholder="fisher@example.com" id="su-email"></div></div>
+  <div class="fg"><label>Phone</label><div class="iw"><span class="ii">📱</span><input class="fi" type="tel" placeholder="+91 98765 43210" id="su-phone"></div></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div class="fg"><label>Password</label><div class="iw"><span class="ii">🔒</span><input class="fi" type="password" placeholder="••••••••"></div></div>
+    <div class="fg"><label>Confirm</label><div class="iw"><span class="ii">🔒</span><input class="fi" type="password" placeholder="••••••••"></div></div>
+  </div>
+  <button class="abtn" onclick="doSignup()">🚀 CREATE ACCOUNT</button>
+  <div class="afooter">Already have an account? <a href="#" onclick="showPage('pg-login');return false;">Sign In</a></div>
+</div>
+</div>
+
+<!-- ═══ FORGOT ═══ -->
+<div class="page" id="pg-forgot">
+<div class="auth-card">
+  <div onclick="showPage('pg-login')" style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ac);cursor:pointer;margin-bottom:20px;opacity:.8;">← Back to Login</div>
+  <div class="auth-logo"><div class="logo-mark"><svg width="38" height="38" viewBox="0 0 38 38" fill="none"><path d="M19 4L34 28H4Z" fill="none" stroke="var(--ac)" stroke-width="1.5"/><circle cx="19" cy="20" r="3.5" fill="var(--ac)"/></svg></div>
+    <div class="auth-title">RESET</div><div class="auth-sub">Account Recovery</div></div>
+  <div style="display:flex;align-items:center;gap:6px;justify-content:center;margin-bottom:22px;">
+    <div class="step-dot active" id="sd1">1</div><div style="flex:1;height:2px;background:var(--border);max-width:36px;" id="sl1"></div>
+    <div class="step-dot" id="sd2">2</div><div style="flex:1;height:2px;background:var(--border);max-width:36px;" id="sl2"></div>
+    <div class="step-dot" id="sd3">3</div>
+  </div>
+  <div id="fs1"><div class="fg"><label>Registered Email</label><div class="iw"><span class="ii">📧</span><input class="fi" id="frg-em" type="email" placeholder="fisher@example.com"></div></div>
+  <button class="abtn" onclick="fStep2()">SEND OTP →</button></div>
+  <div id="fs2" style="display:none;"><div style="text-align:center;font-size:12px;color:var(--t2);margin-bottom:14px;">OTP sent to your email</div>
+  <div class="fg"><label>Enter OTP</label><div class="iw"><span class="ii">🔢</span><input class="fi" id="frg-otp" type="text" placeholder="6-digit OTP" maxlength="6"></div></div>
+  <button class="abtn" onclick="fStep3()">VERIFY OTP →</button></div>
+  <div id="fs3" style="display:none;">
+  <div class="fg"><label>New Password</label><div class="iw"><span class="ii">🔒</span><input class="fi" type="password" placeholder="New password"></div></div>
+  <div class="fg"><label>Confirm</label><div class="iw"><span class="ii">🔒</span><input class="fi" type="password" placeholder="Confirm password"></div></div>
+  <button class="abtn" onclick="fDone()">RESET PASSWORD ✓</button></div>
+  <div id="fs4" style="display:none;text-align:center;"><div style="font-size:48px;margin-bottom:14px;">✅</div>
+  <div class="auth-title" style="font-size:16px;margin-bottom:8px;">RESET DONE!</div>
+  <div style="font-size:12px;color:var(--t2);margin-bottom:18px;">Password updated successfully.</div>
+  <button class="abtn" onclick="showPage('pg-login')">← BACK TO LOGIN</button></div>
+</div>
+</div>
+
+<!-- ═══ MAIN APP ═══ -->
+<div class="page" id="pg-dash">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="tb-logo">⚓ SAFESEA</div>
+    <div class="tb-sep"></div>
+    <div class="tb-coord" id="tb-coord">LAT: 9.2541°N · LON: 79.8510°E</div>
+    <div class="tb-sep"></div>
+    <div class="tb-pill safe" id="tb-zone">● SAFE ZONE</div>
+    <div class="tb-right">
+      <div class="tb-clk" id="tb-clk">--:--:-- UTC</div>
+      <div class="ibtn" onclick="toggleTheme()" id="themeBtn2">🌙</div>
+      <div class="ibtn lang-drop-wrap" style="width:auto;padding:0 10px;font-size:11px;font-weight:700;" onclick="toggleLangDrop2(event)">
+        <span id="langLabel2">EN</span> ▾
+        <div class="lang-drop" id="langDropMenu2">
+          <div class="ld-item active" onclick="setLang('en',this);closeLangDrop()">🇬🇧 English</div>
+          <div class="ld-item" onclick="setLang('ta',this);closeLangDrop()">🇮🇳 தமிழ்</div>
+          <div class="ld-item" onclick="setLang('hi',this);closeLangDrop()">🇮🇳 हिन्दी</div>
+          <div class="ld-item" onclick="setLang('ml',this);closeLangDrop()">🇮🇳 മലയാളം</div>
+          <div class="ld-item" onclick="setLang('te',this);closeLangDrop()">🇮🇳 తెలుగు</div>
+        </div>
+      </div>
+      <div class="ubadge" onclick="togglePDrop()">
+        <div class="uav" id="nav-av" style="background:linear-gradient(135deg,#0055ff,#00aaff)">F</div>
+        <div><div class="uname" id="nav-un">fisher_001</div><div class="urole" id="nav-ur">Fisherman</div></div>
+        <div class="pdrop" id="pdrop">
+          <div class="pd-head"><div class="pd-name" id="pd-name">fisher_001</div><div class="pd-role" id="pd-role">Fisherman</div></div>
+          <div class="pd-item" onclick="navTo('profile');closePDrop()">👤 <span id="pd-profile">My Profile</span></div>
+          <div class="pd-item admin-settings" onclick="navTo('settings');closePDrop()" style="display:none">⚙️ <span id="pd-settings">Settings</span></div>
+          <div class="pd-item" onclick="navTo('notifications');closePDrop()">🔔 <span id="pd-notif">Notifications</span></div>
+          <div class="pd-div"></div>
+          <div class="pd-item out" onclick="doLogout()">🚪 <span id="pd-logout">Logout</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDENAV -->
+  <nav class="sidenav">
+    <div class="ni active" onclick="navTo('map')" id="ni-map"><span class="ni-ic">🗺️</span><span class="ni-lb" id="n-map">Live Map</span></div>
+    <div class="ni" onclick="navTo('dashboard')" id="ni-dashboard"><span class="ni-ic">📊</span><span class="ni-lb" id="n-dash">Dashboard</span></div>
+    <div class="ni admin-only" onclick="navTo('vessels')" id="ni-vessels" style="display:none"><span class="ni-ic">🚢</span><span class="ni-lb">Vessels</span></div>
+    <div class="ni" onclick="navTo('inbox')" id="ni-inbox"><span class="ni-ic">📧</span><span class="ni-lb" id="n-inbox">Inbox</span><div class="ni-badge" id="inbox-badge" style="display:none">0</div></div>
+    <div class="ni" onclick="navTo('sent')" id="ni-sent"><span class="ni-ic">📤</span><span class="ni-lb" id="n-sent">Sent</span></div>
+    <div class="ni" onclick="navTo('notifications')" id="ni-notifications"><span class="ni-ic">🔔</span><span class="ni-lb" id="n-notif">Alerts</span><div class="ni-badge">3</div></div>
+    <div class="ni" onclick="navTo('profile')" id="ni-profile"><span class="ni-ic">👤</span><span class="ni-lb" id="n-prof">Profile</span></div>
+    <div class="ni admin-settings" onclick="navTo('settings')" id="ni-settings" style="display:none"><span class="ni-ic">⚙️</span><span class="ni-lb" id="n-set">Settings</span></div>
+    <div class="nav-sp"></div>
+    <div class="ni" onclick="doLogout()" style="color:var(--danger)"><span class="ni-ic">🚪</span><span class="ni-lb" id="n-out">Logout</span></div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="content" id="contentArea">
+
+    <!-- MAP -->
+    <div class="cp active" id="cp-map" style="overflow:hidden;">
+      <div id="map" style="position:absolute;inset:0;"></div>
+      <div class="mf" style="top:12px;left:12px;">
+        <div class="mft">🚢 <span id="mf-title">VESSEL</span></div>
+        <div class="mfr"><span class="mfk" id="mk-spd">Speed</span><span class="mfv" id="mf-spd">12.4 kn</span></div>
+        <div class="mfr"><span class="mfk" id="mk-hdg">Heading</span><span class="mfv" id="mf-hdg">047°</span></div>
+        <div class="mfr"><span class="mfk" id="mk-dep">Depth</span><span class="mfv" id="mf-dep">42m</span></div>
+        <div class="mfr"><span class="mfk" id="mk-fuel">Fuel</span><span class="mfv" id="mf-fuel">78%</span></div>
+        <div class="mfr"><span class="mfk" id="mk-eta">ETA Border</span><span class="mfv" id="mf-eta">3.2h</span></div>
+      </div>
+      <div class="mf" style="bottom:12px;left:12px;min-width:195px;">
+        <div class="mft">📐 <span id="mf-traj-title">TRAJECTORY</span></div>
+        <div class="mfr"><span class="mfk" id="mk-dir">Direction</span><span class="mfv" id="mf-dir" style="font-size:19px">→</span></div>
+        <div class="mfr"><span class="mfk" id="mk-rvec">Risk Vector</span><span class="mfv" id="mf-rvec">LOW</span></div>
+        <div class="mfr"><span class="mfk" id="mk-bin">Border In</span><span class="mfv" id="mf-bin">18.4 nm</span></div>
+        <div class="mfr"><span class="mfk" id="mk-cross">Cross Time</span><span class="mfv" id="mf-cross">3h 42m</span></div>
+      </div>
+      <div style="position:absolute;bottom:120px;right:12px;z-index:400;">
+        <div class="comp"><span class="cr2 cn">N</span><span class="cr2 cs">S</span><span class="cr2 ce">E</span><span class="cr2 cw">W</span><div class="cneedle" id="cneedle"></div></div>
+      </div>
+      <div style="position:absolute;bottom:12px;right:12px;z-index:400;">
+        <div class="leg-box">
+          <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--ac);margin-bottom:8px;" id="leg-title">ZONES</div>
+          <div class="leg-i"><div class="leg-d" style="background:var(--safe);box-shadow:0 0 5px var(--safe)"></div><div class="leg-t" id="leg-safe">Safe (EEZ)</div></div>
+          <div class="leg-i"><div class="leg-d" style="background:var(--warn);box-shadow:0 0 5px var(--warn)"></div><div class="leg-t" id="leg-warn">Warning</div></div>
+          <div class="leg-i"><div class="leg-d" style="background:var(--danger);box-shadow:0 0 5px var(--danger)"></div><div class="leg-t" id="leg-rest">Restricted</div></div>
+          <div class="leg-i"><div class="leg-d" style="background:var(--ac)"></div><div class="leg-t" id="leg-intl">Intl. Waters</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div class="cp" id="cp-dashboard">
+      <div class="dash-wrap">
+        <div class="page-title" id="dash-title">🛡️ ADMIN COMMAND CENTER</div>
+        <div class="kpi-grid">
+          <div class="kpi blue"><div class="kpi-ic">🚢</div><div class="kpi-n" id="kpi-v">6</div><div class="kpi-l" id="kl-v">Active Vessels</div><div class="kpi-tr">+2 today</div></div>
+          <div class="kpi green"><div class="kpi-ic">✅</div><div class="kpi-n" id="kpi-s">4</div><div class="kpi-l" id="kl-s">Safe Zone</div></div>
+          <div class="kpi yellow"><div class="kpi-ic">⚠️</div><div class="kpi-n" id="kpi-w">1</div><div class="kpi-l" id="kl-w">Warning Zone</div></div>
+          <div class="kpi red"><div class="kpi-ic">🚨</div><div class="kpi-n" id="kpi-d">1</div><div class="kpi-l" id="kl-d">Danger Zone</div></div>
+        </div>
+        <div class="charts-row">
+          <div class="chart-card"><div class="chart-title" id="ct-risk">RISK TREND (24H)</div><canvas id="riskChart" height="80"></canvas></div>
+          <div class="chart-card"><div class="chart-title" id="ct-spd">VESSEL SPEED</div><canvas id="speedChart" height="80"></canvas></div>
+        </div>
+        <div class="tbl-card">
+          <div class="tbl-head"><div class="tbl-title" id="tbl-vessels">🚢 VESSEL MONITORING</div><div style="font-size:11px;color:var(--t3)" id="v-count">6 vessels</div></div>
+          <div style="overflow-x:auto;"><table><thead><tr><th>Vessel ID</th><th>Fisherman</th><th>Position</th><th>Speed</th><th>Dist.</th><th>Risk</th><th>Zone</th><th>Action</th></tr></thead><tbody id="vtbody"></tbody></table></div>
+        </div>
+        <!-- ADMIN VOICE CONTROLS -->
+        <div style="background:var(--card);backdrop-filter:var(--blur);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:18px;">
+          <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--ac);margin-bottom:12px;">🔊 VOICE &amp; ALERT CONTROLS</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px;">
+            <div style="font-size:11px;color:var(--t2);">Voice Language:</div>
+            <button class="vlang active" onclick="setVoiceLang('en',this)">🇬🇧 EN</button>
+            <button class="vlang" onclick="setVoiceLang('ta',this)">🇮🇳 தமிழ்</button>
+            <button class="vlang" onclick="setVoiceLang('hi',this)">🇮🇳 हिन्दी</button>
+            <button class="vlang" onclick="setVoiceLang('ml',this)">🇮🇳 മലയ</button>
+            <button class="vlang" onclick="setVoiceLang('all',this)">🌐 ALL</button>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button onclick="testVoice()" style="padding:10px 16px;border-radius:9px;border:1px solid rgba(0,255,136,.35);background:rgba(0,255,136,.1);color:var(--safe);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;cursor:pointer;">🔊 TEST WELCOME VOICE</button>
+            <button onclick="triggerTestAlert()" style="padding:10px 16px;border-radius:9px;border:1px solid rgba(255,100,0,.45);background:rgba(255,100,0,.12);color:#ff8833;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;cursor:pointer;">⚠️ TRIGGER TEST ALERT</button>
+            <button onclick="testEmail()" style="padding:10px 16px;border-radius:9px;border:1px solid rgba(0,200,255,.3);background:rgba(0,200,255,.08);color:var(--ac);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;cursor:pointer;">📧 TEST EMAIL</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FISHERMAN / CREW DASHBOARD -->
+    <div class="cp" id="cp-fish-dash">
+      <div class="fish-dash">
+        <div class="fish-greeting">
+          <div class="fg-name" id="fish-hello">🎣 Welcome, Fisher!</div>
+          <div class="fg-sub" id="fish-sub">Stay safe — monitor your position and boundaries below.</div>
+        </div>
+        <div class="fish-grid">
+          <div class="fish-card"><div class="fc-icon">🌊</div><div class="fc-val" id="fc-zone" style="color:var(--safe)">SAFE</div><div class="fc-lbl" id="fck-zone">Current Zone</div></div>
+          <div class="fish-card"><div class="fc-icon">📏</div><div class="fc-val" id="fc-dist">18.4<span style="font-size:14px;font-weight:400"> nm</span></div><div class="fc-lbl" id="fck-dist">Distance to Border</div></div>
+          <div class="fish-card"><div class="fc-icon">⚡</div><div class="fc-val" id="fc-risk" style="color:var(--safe)">12%</div><div class="fc-lbl" id="fck-risk">Risk Level</div></div>
+          <div class="fish-card"><div class="fc-icon">🧭</div><div class="fc-val" id="fc-spd">12.4<span style="font-size:14px;font-weight:400"> kn</span></div><div class="fc-lbl" id="fck-spd">Current Speed</div></div>
+        </div>
+        <!-- Compose & quick SOS for fisherman/crew -->
+        <div class="my-emails">
+          <div class="me-head" style="display:flex;align-items:center;justify-content:space-between;">
+            <div class="me-title" id="me-title">📧 MESSAGES</div>
+            <div style="display:flex;gap:8px;">
+              <button onclick="openCompose()" style="padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(0,80,180,.1);color:var(--ac);font-size:10px;font-family:'Orbitron',monospace;font-weight:700;letter-spacing:1px;cursor:pointer;" id="compose-btn">+ COMPOSE</button>
+              <button onclick="sendSOS()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,34,68,.4);background:rgba(255,34,68,.12);color:var(--danger);font-size:10px;font-family:'Orbitron',monospace;font-weight:700;letter-spacing:1px;cursor:pointer;" id="dash-sos-btn">🆘 SOS</button>
+            </div>
+          </div>
+          <div id="my-sent-list"><div style="padding:18px;text-align:center;font-size:12px;color:var(--t3);" id="no-sent-msg">No messages yet</div></div>
+        </div>
+
+        <!-- VOICE & ALERT CONTROL CARD — always visible on dashboard -->
+        <div style="background:var(--card);backdrop-filter:var(--blur);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:18px;">
+          <div style="padding:13px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--ac);">🔊 VOICE &amp; ALERT CONTROLS</div>
+          </div>
+          <div style="padding:14px 16px;">
+            <!-- Voice toggle row -->
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+              <div>
+                <div style="font-size:12px;color:var(--t1);font-weight:600;">Voice Warnings</div>
+                <div style="font-size:10px;color:var(--t3);">Speaks alert in your language</div>
+              </div>
+              <div class="tog-row" style="margin:0;border:none;background:none;padding:0;" onclick="toggleVoice()">
+                <div class="tog" id="voice-tog-dash"><div class="tok"></div></div>
+              </div>
+            </div>
+            <!-- Language selector -->
+            <div style="font-size:9px;color:var(--t3);letter-spacing:1px;margin-bottom:8px;">VOICE LANGUAGE</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+              <button class="vlang active" onclick="setVoiceLang('en',this)">🇬🇧 English</button>
+              <button class="vlang" onclick="setVoiceLang('ta',this)">🇮🇳 தமிழ்</button>
+              <button class="vlang" onclick="setVoiceLang('hi',this)">🇮🇳 हिन्दी</button>
+              <button class="vlang" onclick="setVoiceLang('ml',this)">🇮🇳 മലയാളം</button>
+              <button class="vlang" onclick="setVoiceLang('all',this)">🌐 ALL</button>
+            </div>
+            <!-- 3 action buttons -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+              <button onclick="testVoice()" style="padding:11px 8px;border-radius:9px;border:1px solid rgba(0,255,136,.35);background:rgba(0,255,136,.1);color:var(--safe);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;">🔊 TEST WELCOME VOICE</button>
+              <button onclick="triggerTestAlert()" style="padding:11px 8px;border-radius:9px;border:1px solid rgba(255,100,0,.45);background:rgba(255,100,0,.12);color:#ff8833;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;">⚠️ TRIGGER TEST ALERT</button>
+            </div>
+            <div style="padding:8px 10px;background:rgba(0,200,255,.05);border:1px solid rgba(0,200,255,.15);border-radius:8px;font-size:10px;color:var(--t3);line-height:1.6;">
+              💡 <b style="color:var(--ac2)">How it works:</b> Toggle Voice ON → pick language → click TEST WELCOME VOICE to hear the greeting. Click TRIGGER TEST ALERT to hear the full alarm + boundary warning. Real alerts fire automatically when risk &gt; 80%.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INBOX (admin receives, fisherman/crew sees their inbox) -->
+    <div class="cp" id="cp-inbox">
+      <div class="dash-wrap">
+        <div class="page-title" id="inbox-title">📧 INBOX</div>
+        <div class="inbox-card">
+          <div class="inbox-head">
+            <div class="inbox-title" id="inbox-all">ALL MESSAGES</div>
+            <div style="font-size:11px;color:var(--t3)" id="inbox-count">0 messages</div>
+          </div>
+          <div id="inbox-list"><div style="padding:24px;text-align:center;font-size:12px;color:var(--t3);" id="no-inbox-msg">No messages received</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SENT EMAILS PAGE (all roles) -->
+    <div class="cp" id="cp-sent">
+      <div class="dash-wrap">
+        <div class="page-title" id="sent-title">📤 SENT EMAILS</div>
+        <div class="inbox-card">
+          <div class="inbox-head">
+            <div class="inbox-title">ALL SENT MESSAGES</div>
+            <div style="font-size:11px;color:var(--t3)" id="sent-count">0 messages</div>
+          </div>
+          <div id="sent-list"><div style="padding:24px;text-align:center;font-size:12px;color:var(--t3);">No sent messages yet</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div class="cp" id="cp-notifications">
+      <div class="notif-wrap">
+        <div style="font-family:'Orbitron',monospace;font-size:12px;color:var(--ac);letter-spacing:2px;margin-bottom:16px;" id="notif-title">NOTIFICATIONS</div>
+        <div id="notif-list"></div>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="cp" id="cp-profile">
+      <div class="prof-wrap">
+        <div class="prof-hero">
+          <div class="p-av" id="p-av">F</div>
+          <div>
+            <div class="p-nm" id="p-nm">fisher_001</div>
+            <div class="p-rbadge" id="p-rb" style="background:rgba(0,200,255,.1);color:var(--ac);border:1px solid var(--ac)">🎣 Fisherman</div>
+            <div class="p-em" id="p-em">fisher@safesea.in</div>
+          </div>
+          <button class="p-ebtn admin-only" id="edit-btn" style="display:none">✏️ Edit Profile</button>
+        </div>
+        <div class="pgrid" id="profile-grid"></div>
+      </div>
+    </div>
+
+    <!-- SETTINGS (admin only) -->
+    <div class="cp" id="cp-settings">
+      <div class="set-wrap">
+        <div style="font-family:'Orbitron',monospace;font-size:12px;color:var(--ac);letter-spacing:2px;margin-bottom:18px;" id="set-title">SETTINGS</div>
+        <div class="set-sec">
+          <div class="set-t" id="set-appear">Appearance</div>
+          <div class="set-r"><div><div class="sr-l" id="set-dm">Dark Mode</div><div class="sr-d" id="set-dm2">Toggle dark/light theme</div></div>
+            <div class="tog-row" style="margin:0;border:none;background:none;padding:0;" onclick="toggleTheme()"><div class="tog" id="theme-tog"><div class="tok"></div></div></div>
+          </div>
+        </div>
+        <div class="set-sec">
+          <div class="set-t" id="set-lang">Language</div>
+          <div class="lang-opts">
+            <div class="lo active" onclick="setLang('en',this)">🇬🇧 English</div>
+            <div class="lo" onclick="setLang('ta',this)">🇮🇳 தமிழ்</div>
+            <div class="lo" onclick="setLang('hi',this)">🇮🇳 हिन्दी</div>
+            <div class="lo" onclick="setLang('ml',this)">🇮🇳 മലയാളം</div>
+            <div class="lo" onclick="setLang('te',this)">🇮🇳 తెలుగు</div>
+          </div>
+        </div>
+        <div class="set-sec">
+          <div class="set-t" id="set-alert">Alert Preferences</div>
+          <div class="set-r"><div><div class="sr-l" id="set-email">Email Alerts</div><div class="sr-d">Send email on boundary breach</div></div>
+            <div class="tog-row" style="margin:0;border:none;background:none;padding:0;" onclick="toggleEmail()"><div class="tog" id="email-tog2"><div class="tok"></div></div></div>
+          </div>
+          <div class="set-r"><div><div class="sr-l" id="set-voice">Voice Warnings</div><div class="sr-d">Multilingual voice on breach</div></div>
+            <div class="tog-row" style="margin:0;border:none;background:none;padding:0;" onclick="toggleVoice()"><div class="tog" id="voice-tog2"><div class="tok"></div></div></div>
+          </div>
+          <div class="set-r"><div><div class="sr-l" id="set-alarm">Alarm Sound</div><div class="sr-d">Audio alarm on high risk</div></div>
+            <div class="tog-row" style="margin:0;border:none;background:none;padding:0;" onclick="toggleAlarm()"><div class="tog on" id="alarm-tog"><div class="tok" style="transform:translateX(17px)"></div></div></div>
+          </div>
+        </div>
+        <div class="set-sec">
+          <div class="set-t" id="set-email-cfg">EmailJS Configuration</div>
+          <div class="fg"><label>Service ID</label><div class="iw"><span class="ii">📡</span><input class="fi" type="text" id="ejs-service" placeholder="service_iuhkfm4" value="service_iuhkfm4"></div></div>
+          <div class="fg"><label>Template ID</label><div class="iw"><span class="ii">📝</span><input class="fi" type="text" id="ejs-template" placeholder="template_xxxxxxx"></div></div>
+          <div class="fg"><label>Public Key</label><div class="iw"><span class="ii">🔑</span><input class="fi" type="text" id="ejs-pubkey" placeholder="Your EmailJS Public Key"></div></div>
+          <div class="fg"><label>Alert Recipient Email</label><div class="iw"><span class="ii">📧</span><input class="fi" type="email" id="admin-email-input" placeholder="sharupriya3010@gmail.com" value="sharupriya3010@gmail.com"></div></div>
+          <div style="margin-top:10px;"><button class="abtn" style="max-width:200px;font-size:10px;padding:10px;" onclick="saveSettings()" id="save-btn">SAVE SETTINGS</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VESSELS (admin) -->
+    <div class="cp" id="cp-vessels">
+      <div class="dash-wrap">
+        <div class="page-title">🚢 ALL VESSELS</div>
+        <div class="tbl-card">
+          <div class="tbl-head"><div class="tbl-title">LIVE TRACKING</div></div>
+          <div style="overflow-x:auto;"><table><thead><tr><th>ID</th><th>Name</th><th>Lat</th><th>Lon</th><th>Speed</th><th>Dist.</th><th>Risk</th><th>Zone</th></tr></thead><tbody id="vtbody2"></tbody></table></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- RIGHT PANEL -->
+  <div class="rpanel" id="rpanel">
+    <div class="rps">
+      <div class="rph" id="rph-risk">🎯 Risk Engine</div>
+      <div class="gw">
+        <svg viewBox="0 0 170 96" width="170" height="96">
+          <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--safe)"/><stop offset="50%" stop-color="var(--warn)"/><stop offset="100%" stop-color="var(--danger)"/></linearGradient></defs>
+          <path d="M 18 86 A 66 66 0 0 1 152 86" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="12" stroke-linecap="round"/>
+          <path id="gauge-fill" d="M 18 86 A 66 66 0 0 1 152 86" fill="none" stroke="url(#rg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 207"/>
+        </svg>
+        <div class="gv"><div class="gn" id="gauge-pct" style="color:var(--safe)">12%</div><div class="gl" id="gl-risk">RISK LEVEL</div></div>
+      </div>
+      <div class="zbar"><div class="zcur" id="zcur" style="left:10%"></div></div>
+      <div class="zlbls"><span style="color:var(--safe)" id="zl-s">SAFE</span><span style="color:var(--warn)" id="zl-w">WARN</span><span style="color:var(--danger)" id="zl-d">DANGER</span></div>
+      <div style="text-align:center;margin-top:10px;">
+        <div id="zone-badge" style="display:inline-block;padding:5px 18px;border-radius:20px;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--safe);border:1.5px solid var(--safe);background:rgba(0,255,136,0.1);">● SAFE ZONE</div>
+      </div>
+    </div>
+    <div class="rps">
+      <div class="rph" id="rph-live">📡 Live Data</div>
+      <div class="sg">
+        <div class="sc"><div class="sc-l" id="scl-spd">Speed</div><div class="sc-v" id="rp-spd">12.4<span class="sc-u">kn</span></div></div>
+        <div class="sc"><div class="sc-l" id="scl-hdg">Heading</div><div class="sc-v" id="rp-hdg">047<span class="sc-u">°</span></div></div>
+        <div class="sc"><div class="sc-l" id="scl-lat">Latitude</div><div class="sc-v" id="rp-lat">9.254<span class="sc-u">°N</span></div></div>
+        <div class="sc"><div class="sc-l" id="scl-lon">Longitude</div><div class="sc-v" id="rp-lon">79.851<span class="sc-u">°E</span></div></div>
+        <div class="sc"><div class="sc-l" id="scl-dist">Dist. Border</div><div class="sc-v" id="rp-dist">18.4<span class="sc-u">nm</span></div></div>
+        <div class="sc"><div class="sc-l" id="scl-eta">ETA Border</div><div class="sc-v" id="rp-eta">3.2<span class="sc-u">h</span></div></div>
+      </div>
+    </div>
+    <div class="rps">
+      <div class="rph" id="rph-prob">⚙️ Probability Engine</div>
+      <div class="cb">
+        <div class="ct" id="ct-comp">Risk Components</div>
+        <div class="cr"><span class="ck">P(distance)</span><div class="mini-bar"><div class="bar-track"><div id="bar-pd" class="bar-fill" style="width:8%;background:var(--ac)"></div></div><span class="cv" id="c-pd">0.08</span></div></div>
+        <div class="cr"><span class="ck">P(direction)</span><div class="mini-bar"><div class="bar-track"><div id="bar-pdir" class="bar-fill" style="width:12%;background:var(--warn)"></div></div><span class="cv" id="c-pdir">0.12</span></div></div>
+        <div class="cr"><span class="ck">P(speed)</span><div class="mini-bar"><div class="bar-track"><div id="bar-pspd" class="bar-fill" style="width:10%;background:var(--safe)"></div></div><span class="cv" id="c-pspd">0.10</span></div></div>
+        <div class="cr"><span class="ck">Weights α</span><span class="cv">0.5, 0.3, 0.2</span></div>
+        <div class="cf" id="c-formula">R = 0.50×0.08 + 0.30×0.12 + 0.20×0.10 = 0.12</div>
+      </div>
+      <div class="cb">
+        <div class="ct" id="ct-traj">Trajectory</div>
+        <div class="cr"><span class="ck">Δlat/hr</span><span class="cv" id="c-dlat">+0.042°</span></div>
+        <div class="cr"><span class="ck">Δlon/hr</span><span class="cv" id="c-dlon">+0.055°</span></div>
+        <div class="cr"><span class="ck">ETA border</span><span class="cv" id="c-eta">3.2h</span></div>
+        <div class="cr"><span class="ck">Proj. pos</span><span class="cv" id="c-proj">9.39°N 79.98°E</span></div>
+      </div>
+    </div>
+    <div class="rps">
+      <div class="rph" id="rph-wx">🌊 Marine Weather</div>
+      <div class="wr"><div class="wi" id="wx-icon">⛅</div><div><div class="wt" id="wx-temp">28°C</div><div class="wd" id="wx-desc">Partly Cloudy · Bay of Bengal</div></div></div>
+      <div class="wg">
+        <div class="wc"><div class="wl" id="wl-wave">Wave</div><div class="wv" id="wx-wave">1.2m</div></div>
+        <div class="wc"><div class="wl" id="wl-wind">Wind</div><div class="wv" id="wx-wind">14kn</div></div>
+        <div class="wc"><div class="wl" id="wl-vis">Visibility</div><div class="wv" id="wx-vis">12nm</div></div>
+        <div class="wc"><div class="wl" id="wl-pres">Pressure</div><div class="wv" id="wx-pres">1012hPa</div></div>
+      </div>
+    </div>
+    <div class="rps">
+      <div class="rph" id="rph-bound">🗺️ Boundaries</div>
+      <div class="bi"><div class="bd" style="background:var(--danger);box-shadow:0 0 6px var(--danger)"></div><div><div class="bn" id="bn1">IND–LKA Line</div><div class="bs" id="bs1">Restricted</div></div><div class="bdist" id="bd1" style="color:var(--danger)">18.4nm</div></div>
+      <div class="bi"><div class="bd" style="background:var(--warn);box-shadow:0 0 6px var(--warn)"></div><div><div class="bn" id="bn2">Indian EEZ</div><div class="bs" id="bs2">Warning</div></div><div class="bdist" id="bd2" style="color:var(--warn)">34.2nm</div></div>
+      <div class="bi"><div class="bd" style="background:var(--ac)"></div><div><div class="bn" id="bn3">Intl. Waters</div><div class="bs" id="bs3">Safe</div></div><div class="bdist" id="bd3" style="color:var(--ac)">51.0nm</div></div>
+    </div>
+    <div class="rps">
+      <div class="rph" id="rph-alert">📧 Alerts</div>
+      <div class="tog-row" onclick="toggleEmail()"><div class="tog" id="email-tog-sw"><div class="tok"></div></div><div class="tog-l" id="email-lbl">Email Alerts Off</div></div>
+      <div class="tog-row" onclick="toggleVoice()"><div class="tog" id="voice-tog-sw"><div class="tok"></div></div><div class="tog-l" id="voice-lbl">Voice Warnings Off</div></div>
+      <div style="margin-top:10px;">
+        <div style="font-size:9px;color:var(--t3);letter-spacing:1px;margin-bottom:6px;" id="vl-title">VOICE LANGUAGE</div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;" id="vlang-btns">
+          <button class="vlang active" onclick="setVoiceLang('en',this)">🇬🇧 EN</button>
+          <button class="vlang" onclick="setVoiceLang('ta',this)">🇮🇳 தமிழ்</button>
+          <button class="vlang" onclick="setVoiceLang('hi',this)">🇮🇳 हिन्दी</button>
+          <button class="vlang" onclick="setVoiceLang('ml',this)">🇮🇳 മലയ</button>
+          <button class="vlang" onclick="setVoiceLang('all',this)">🌐 ALL</button>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:8px 10px;background:rgba(0,200,255,.06);border:1px solid var(--border);border-radius:8px;">
+        <div style="font-size:9px;color:var(--t3);letter-spacing:1px;margin-bottom:4px;" id="ae-label">ALERT EMAIL</div>
+        <div style="font-size:11px;color:var(--ac2);font-family:'JetBrains Mono',monospace;" id="alert-email-disp">sharupriya3010@gmail.com</div>
+      </div>
+      <button onclick="testEmail()" style="margin-top:10px;width:100%;padding:9px;border-radius:9px;border:1px solid rgba(0,200,255,.3);background:rgba(0,200,255,.08);color:var(--ac);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;" id="test-email-btn">📧 SEND TEST EMAIL</button>
+      <button onclick="testVoice()" style="margin-top:8px;width:100%;padding:9px;border-radius:9px;border:1px solid rgba(0,255,136,.3);background:rgba(0,255,136,.08);color:var(--safe);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;" id="test-voice-btn">🔊 TEST VOICE NOW</button>
+      <button onclick="triggerTestAlert()" style="margin-top:6px;width:100%;padding:9px;border-radius:9px;border:1px solid rgba(255,100,0,.4);background:rgba(255,100,0,.1);color:#ff8833;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;">⚠️ TRIGGER TEST ALERT</button>
+      <div style="margin-top:6px;padding:7px 10px;background:rgba(255,200,0,.06);border:1px solid rgba(255,200,0,.15);border-radius:8px;font-size:9px;color:var(--warn);line-height:1.5;">⚠️ Use Chrome/Edge for voice. Enable Voice toggle first. Welcome voice plays on login when Voice is ON.</div>
+    </div>
+    <!-- SOS — visible for fisherman and crew -->
+    <div class="rps" id="sos-section">
+      <div class="rph" id="rph-sos">🆘 SOS Broadcast</div>
+      <button onclick="sendSOS()" style="width:100%;padding:13px;border:none;border-radius:11px;background:linear-gradient(135deg,#880011,var(--danger));color:#fff;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:2px;cursor:pointer;box-shadow:0 0 22px rgba(255,34,68,.32);" id="sos-btn">🆘 BROADCAST SOS</button>
+      <div style="margin-top:7px;font-size:10px;color:var(--t3);text-align:center;" id="sos-desc">Sends location + risk email to Admin</div>
+    </div>
+  </div>
+</div><!-- /pg-dash -->
+
+<!-- COMPOSE MODAL -->
+<div class="email-modal" id="composeModal">
+  <div class="em-box">
+    <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--ac);letter-spacing:2px;margin-bottom:18px;" id="cm-title">✉️ COMPOSE EMAIL</div>
+    <div class="em-field"><span class="em-fl" id="cm-to-l">To:</span><span class="em-fv" id="cm-to">sharupriya3010@gmail.com</span></div>
+    <div class="em-field"><span class="em-fl" id="cm-from-l">From:</span><span class="em-fv" id="cm-from">fisher@safesea.in</span></div>
+    <div class="fg" style="margin-top:12px;"><label id="cm-sub-l">Subject</label><input class="fi" style="padding-left:14px;" id="cm-subject" type="text" placeholder="Enter subject..."></div>
+    <div class="fg"><label id="cm-body-l">Message</label><textarea class="fi" id="cm-message" style="padding:12px 14px;min-height:100px;resize:vertical;" placeholder="Type your message..."></textarea></div>
+    <div style="display:flex;gap:8px;margin-top:4px;">
+      <button class="r-send" onclick="sendComposedEmail()" id="cm-send-btn">📧 SEND EMAIL</button>
+      <button class="r-close" onclick="closeCompose()">✕ Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL DETAIL MODAL -->
+<div class="email-modal" id="emailDetailModal">
+  <div class="em-box">
+    <div style="font-family:'Orbitron',monospace;font-size:12px;color:var(--ac);letter-spacing:2px;margin-bottom:16px;">📧 MESSAGE DETAIL</div>
+    <div class="em-field"><span class="em-fl">From:</span><span class="em-fv" id="ed-from">—</span></div>
+    <div class="em-field"><span class="em-fl">To:</span><span class="em-fv" id="ed-to">—</span></div>
+    <div class="em-field"><span class="em-fl">Subject:</span><span class="em-fv" id="ed-subject">—</span></div>
+    <div class="em-field"><span class="em-fl">Time:</span><span class="em-fv" id="ed-time">—</span></div>
+    <div class="em-body-text" id="ed-body">—</div>
+    <div class="reply-box" id="reply-section">
+      <div style="font-size:10px;color:var(--ac);letter-spacing:1px;margin-bottom:6px;" id="re-title">↩️ REPLY TO FISHERMAN</div>
+      <textarea id="reply-text" placeholder="Type your reply..."></textarea>
+      <div class="reply-btns">
+        <button class="r-send" onclick="sendReply()" id="re-btn">📧 SEND REPLY</button>
+        <button class="r-close" onclick="closeEmailDetail()">✕ Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ALERT OVERLAY — matches screenshot -->
+<div id="alertOverlay">
+  <div class="al-border-anim"></div>
+  <div class="al-box">
+    <div class="al-megaphone">📢</div>
+    <div class="al-t" id="al-title">MARITIME BOUNDARY VIOLATION</div>
+    <div class="al-coords" id="al-coords">LAT: 9.2541°N  LON: 79.8510°E  SPEED: 12.4 kn</div>
+    <div class="al-langs">
+      <div class="al-lang-row"><span class="al-lang-flag">🇬🇧</span><span id="al-en"><b>DANGER:</b> Approaching restricted waters. Return immediately.</span></div>
+      <div class="al-lang-row"><span class="al-lang-flag">🇮🇳</span><span id="al-hi"><b>खतरा:</b> प्रतिबंधित जल में प्रवेश हो रहा है। तुरंत वापस लौटें।</span></div>
+      <div class="al-lang-row"><span class="al-lang-flag">🏳️</span><span id="al-ta"><b>ஆபத்து:</b> தடைசெய்யப்பட்ட நீர்ப்பரப்பில் நுழைகிறீர்கள். உடனடியாக திரும்புங்கள்!</span></div>
+      <div class="al-lang-row"><span class="al-lang-flag">🏳️</span><span id="al-ur">خطرہ: پانی کی حدود تک پہنچ رہے ہیں۔ فوری واپس لوٹیں۔</span></div>
+    </div>
+    <div class="al-status-row">
+      <div class="al-status-item">🔊 Voice alert active</div>
+      <div class="al-status-item">📡 Coast Guard notified</div>
+      <div class="al-status-item">📶 Distress signal broadcast</div>
+    </div>
+    <div class="al-btns">
+      <button class="al-btn al-ack" onclick="dismissAlert()" id="al-ack-btn">ACKNOWLEDGE</button>
+      <button class="al-btn al-cg" onclick="sendSOS();dismissAlert()" id="al-sos-btn">CONTACT COAST GUARD</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><div class="toast-t" id="toast-t"></div><div id="toast-m"></div></div>
