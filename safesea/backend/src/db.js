@@ -30,7 +30,16 @@ async function waitForDb(retries = 30) {
 
 async function init() {
   await waitForDb();
-  const schema = fs.readFileSync(path.join(DB_DIR, 'schema.sql'), 'utf8');
+  const schemaPath = path.join(DB_DIR, 'schema.sql');
+
+console.log('DB_DIR =', DB_DIR);
+console.log('schemaPath =', schemaPath);
+
+const stat = fs.statSync(schemaPath);
+console.log('isFile =', stat.isFile());
+console.log('isDirectory =', stat.isDirectory());
+
+const schema = fs.readFileSync(schemaPath, 'utf8');
   await pool.query(schema);
   console.log('[db] schema ensured');
 
