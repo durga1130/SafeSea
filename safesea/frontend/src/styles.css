@@ -1,5 +1,5 @@
 :root,[data-theme="dark"]{
-  --bg:#020b18;--bg2:#041428;--card:rgba(4,22,50,0.82);--card2:rgba(6,28,62,0.9);
+  --bg:purple;--bg2:#041428;--card:rgba(4,22,50,0.82);--card2:rgba(6,28,62,0.9);
   --border:rgba(0,200,255,0.2);--bh:rgba(0,200,255,0.5);
   --t1:#e8f4ff;--t2:rgba(190,225,255,0.8);--t3:rgba(130,190,255,0.5);
   --ac:#00d4ff;--ac2:#00ffea;--safe:#00ff88;--warn:#ffd600;--danger:#ff2244;
