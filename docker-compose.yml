@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: safesea-jenkins-db
+    environment:
+      POSTGRES_USER: safesea
+      POSTGRES_PASSWORD: safesea
+      POSTGRES_DB: safesea
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U safesea -d safesea"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: safesea-jenkins-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: "4000"
+      PGHOST: db
+      PGPORT: "5432"
+      PGUSER: safesea
+      PGPASSWORD: safesea
+      PGDATABASE: safesea
+      JWT_SECRET: change-me-in-production
+      DB_DIR: /app/db
+    volumes:
+      - ./db:/app/db:ro
+    ports:
+      - "4001:4000"
+
+  frontend:
+    build: ./frontend
+    container_name: safesea-jenkins-frontend
+    depends_on:
+      - backend
+    ports:
+      - "8081:80"
+
+volumes:
+  pgdata:
