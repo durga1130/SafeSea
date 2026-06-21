@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: safesea
       POSTGRES_DB: safesea
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
@@ -36,7 +36,7 @@ services:
     volumes:
       - ./db:/app/db:ro
     ports:
-      - "4001:4000"
+      - "4000:4000"
 
   frontend:
     build: ./frontend
@@ -44,7 +44,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "8081:80"
+      - "8080:80"
 
 volumes:
   pgdata:
