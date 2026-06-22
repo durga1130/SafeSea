@@ -12,8 +12,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Show files
-        run: ls -R
-
-      - name: Build Docker image
-        run: docker build -t myapp .
+      - name: Build containers
+        run: docker compose build
