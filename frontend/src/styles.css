@@ -2,7 +2,7 @@
   --bg:#1275ff;--bg2:#041428;--card:rgba(4,22,50,0.82);--card2:rgba(6,28,62,0.9);
   --border:rgba(0,200,255,0.2);--bh:rgba(0,200,255,0.5);
   --t1:hsl(0, 0%, 0%);--t2:rgba(190,225,255,0.8);--t3:rgba(130,190,255,0.5);
-  --ac:#b217ff;--ac2:#00ffea;--safe:#00ff88;--warn:#ffd600;--danger:#ff2244;
+  --ac:#aa00ff;--ac2:#00ffea;--safe:#00ff88;--warn:#ffd600;--danger:#ff2244;
   --nav:rgba(0, 71, 238, 0.95);--topbar:rgba(2,10,28,0.97);
   --shadow:0 8px 32px rgba(0,0,0,0.55);--blur:blur(20px);
   --mf:brightness(0.72) saturate(0.65) hue-rotate(195deg);
