@@ -44,5 +44,12 @@ export default function App() {
     return () => { cancelled = true; };
   }, []);
 
-  return <div ref={ref} id="safesea-root" />;
+  return (
+  <div>
+    <h1 style={{ color: 'red', fontSize: '50px', textAlign: 'center' }}>
+      GITHUB ACTIONS TEST
+    </h1>
+    <div ref={ref} id="safesea-root" />
+  </div>
+);
 }
